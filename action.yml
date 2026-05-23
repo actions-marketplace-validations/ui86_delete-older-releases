@@ -1,0 +1,41 @@
+name: Delete Older Releases
+description: delete older releases of any repo
+author: ui86
+
+branding:
+  color: red
+  icon: delete
+
+inputs:
+  keep_latest:
+    description: how many latest releases to keep
+    required: true
+  keep_min_download_counts:
+    description: keep old releases with downloads greater than this parameter <
+    required: false
+    default: 0
+  delete_expired_data:
+    description: Delete releases older than a specified number of days
+    required: false
+    default: 0
+  repo:
+    description: repo name in the form of <owner>/<repoName>
+    required: false
+  delete_tags:
+    description: whether to delete tags associated to older releases or not
+    required: false
+  delete_prerelease_only:
+    description: Remove only prerelease
+    required: false
+    default: false
+  delete_tag_pattern:
+    description: part of the tag name. Example, if you want to delete 0.0.1-beta and 0.0.2-beta but not 0.0.1 then set this to just "beta". If not set then it will target all releases.
+    required: false
+  github_rest_api_url:
+    description: the URL of the GitHub Rest API to be used.  This might need to be different if you are a GitHub Enterprise user.
+    required: false
+    default: api.github.com
+
+runs:
+  using: 'node24'
+  main: "index.js"
